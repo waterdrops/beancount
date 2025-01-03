@@ -3,13 +3,12 @@ __license__ = "GNU GPLv2"
 
 import unittest
 
+from beancount import loader
 from beancount.parser import cmptest
 from beancount.plugins import nounused
-from beancount import loader
 
 
 class TestValidateUnusedAccounts(cmptest.TestCase):
-
     @loader.load_doc()
     def test_validate_unused_accounts(self, entries, _, options_map):
         """
@@ -27,8 +26,8 @@ class TestValidateUnusedAccounts(cmptest.TestCase):
         """
         _, errors = nounused.validate_unused_accounts(entries, options_map)
         self.assertEqual(1, len(errors))
-        self.assertEqual('Assets:Account3', errors[0].entry.account)
+        self.assertEqual("Assets:Account3", errors[0].entry.account)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
